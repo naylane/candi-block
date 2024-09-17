@@ -32,7 +32,7 @@ void queda(int peca[2][4]);
 void coloca_peca(int posX, int posY, int peca[2][4]);
 void tira_peca(int posX, int posY);
 int colisao(int posX, int posY, int peca[2][4]);
-void fixa_peca();
+void salva_matriz();
 int nova_peca();
 
 
@@ -94,7 +94,7 @@ void queda(int peca[2][4]) {
         if (colisao(i + 1, 0, peca)) { // caso fosse fosse gerar uma colisao na proxima linha
             coloca_peca(i, 0, peca); // fixa a peca na ultima posição valida
             exibe_peca(i, 0, peca, video_PINK);
-            fixa_peca();
+            salva_matriz();
             break;
         }
 
@@ -141,7 +141,7 @@ Função:
 Parâmetros: 
 Retorno: vazio.
 */
-void fixa_peca() {
+void salva_matriz() {
     int i, j;
     for(i = 0; i < LINHAS; i++) {
         for (j = 0; j < COLUNAS; j++){

@@ -25,18 +25,22 @@ int peca_3[2][4] = {
     };
 
 void imprime_matriz(int matriz[LINHAS][COLUNAS]);
-void queda(int peca[2][4]);
+int queda(int peca[2][4]);
 void coloca_peca(int posX, int posY, int peca[2][4]);
 void tira_peca(int posX, int posY);
 int colisao(int posX, int posY, int peca[2][4]);
-void fixa_peca();
+void salva_matriz();
 int nova_peca();
+void verifica_agrupamento();
+void remove_linha(int linha);
 
 
 /*
 Função principal do jogo.
 */
-int main() { 
+int main() {
+    int perdeu = 0;
+
     queda(nova_peca());
 
     /* 
@@ -70,13 +74,14 @@ Função:
 Parâmetros: peca[2][4]: A matriz que representa a peça atual, onde 1 indica a presença de um bloco da peça e 0 indica ausência de bloco.
 Retorno: vazio
 */
-void queda(int peca[2][4]) {
+int queda(int peca[2][4]) {
     int i;
     for(i = 0; i <= LINHAS - 2; i++) {
-        if (colisao(i + 1, 0, peca)) { // caso fosse fosse gerar uma colisao na proxima linha
+        if (colisao(i + 1, 0, peca)) { // caso fosse fosse gerar uma colisão na proxima linha
             coloca_peca(i, 0, peca); // fixa a peca na ultima posição valida
             imprime_matriz(matriz_tela);
-            fixa_peca();
+            salva_matriz();
+            verifica_agrupamento();
             break;
         }
 
@@ -85,6 +90,8 @@ void queda(int peca[2][4]) {
         sleep(1);
         tira_peca(i, 0); // reseta a posição anterior para 0
     }
+
+    return 0;
 }
 
 /*
@@ -119,16 +126,16 @@ void tira_peca(int posX, int posY) {
 }
 
 /*
-Função: 
-Parâmetros: 
+Função: Faz uma cópia da matriz dinâmica para a matriz fixa.
+Parâmetros: nenhum.
 Retorno: vazio.
 */
-void fixa_peca() {
+void salva_matriz() {
     int i, j;
     for(i = 0; i < LINHAS; i++) {
         for (j = 0; j < COLUNAS; j++){
             matriz_fixa[i][j] = matriz_tela[i][j];
-        } 
+        }
     }
 }
 
@@ -167,5 +174,41 @@ int nova_peca() {
         case 1: return peca_1; break;
         case 2: return peca_2; break;
         case 3: return peca_3; break;
+    }
+}
+
+void verifica_agrupamento() {
+    printf("verificando...\n");
+    int i, j, agrupamento;
+    
+    for (i = 0; i < LINHAS; i++) {
+        agrupamento = 1;
+        for (j = 0; j < COLUNAS; j++) {
+            if (matriz_fixa[i][j] == 0) {
+                agrupamento = 0;
+                break;
+            }
+        }
+
+        if (agrupamento) {
+            remove_linha(i);
+            i--; // é necessário verificar novamente a linha i pois a matriz mudou pela retirada de uma linha
+        }
+    }
+}
+
+void remove_linha(int linha) {
+    int i, j;
+
+    // limpa a linha agrupada
+    for (j = 0; j < COLUNAS; j++) {
+        matriz_fixa[linha][j] = 0;
+    }
+    
+    // "move" as linhas para baixo
+    for (i = linha; i > 0; i--) {
+        for (j = 0; j < COLUNAS; j++) {
+            matriz_fixa[i][j] = matriz_fixa[i - 1][j];
+        }
     }
 }

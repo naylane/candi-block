@@ -1,8 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h.>
 #include <time.h>
-#include <video.h>
-//#include <intelfpgaup/video.h>
+#include <intelfpgaup/video.h>
 
 #define LINHAS 8
 #define COLUNAS 5
@@ -26,14 +24,14 @@ int peca_3[2][4] = {
         {1, 1, 1, 1},
     };
 
-void inicializa_video();
+int inicializa_video();
 void exibe_peca(int posX, int posY, int peca[2][4], short cor);
 void queda(int peca[2][4]);
 void coloca_peca(int posX, int posY, int peca[2][4]);
 void tira_peca(int posX, int posY);
 int colisao(int posX, int posY, int peca[2][4]);
 void salva_matriz();
-int nova_peca();
+int (*nova_peca())[4];
 
 
 /*
@@ -41,11 +39,11 @@ Função principal do jogo.
 */
 int main() { 
     inicializa_video();
-    
+
     queda(nova_peca());
 
     video_close();
-    
+
     return 0;
 }
 
@@ -54,12 +52,13 @@ Função:
 Parâmetros: nenhum.
 Retorno: vazio.
 */
-void inicializa_video() {
+int inicializa_video() {
     if (!video_open()) {
         printf("Erro ao abrir o video.\n");
         return 1;
     }
     video_clear();
+    return 0;
 }
 
 /*
@@ -78,6 +77,7 @@ void exibe_peca(int posX, int posY, int peca[2][4], short cor) {
                 int x2 = x1 + tamanho_bloco - 1;
                 int y2 = y1 + tamanho_bloco - 1;
                 video_box(x1, y1, x2, y2, cor);
+                video_show();
             }
         }
     }
@@ -177,7 +177,7 @@ Função:
 Parâmetros: nenhum.
 Retorno:
 */
-int nova_peca() {
+int (*nova_peca())[4] {
     srand((unsigned)time(NULL));
     int tipo_peca = rand() % 4;
     switch (tipo_peca) {

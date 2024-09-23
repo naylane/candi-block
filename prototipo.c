@@ -1,5 +1,7 @@
 /*
-pausa
+pausa (testar no LEDs)
+pontuacao
+menu (testar no LEDs)
 
 OK agrupamento por cor (descer outras pecas)
 OK agrupamento por cor
@@ -14,6 +16,7 @@ BUG colisao com outra peca (fundo)
 #include <stdio.h>
 #include <unistd.h>
 #include <time.h>
+#include <termios.h> // Para capturar entrada sem esperar enter
 
 #define LINHAS 8
 #define COLUNAS 5
@@ -29,6 +32,7 @@ void verifica_agrupamento();
 void remove_agrupamento(int linha, int coluna);
 void desce_blocos_acima();
 int sorteia_peca();
+void pausar();
 void copia_matriz(int matriz_a[LINHAS][COLUNAS], int matriz_b[LINHAS][COLUNAS]);
 void imprime_matriz(int matriz[LINHAS][COLUNAS]);
 
@@ -36,7 +40,7 @@ void imprime_matriz(int matriz[LINHAS][COLUNAS]);
 Função principal do jogo.
 */
 int main() {
-    int encerrou = 0;
+    int encerrou, pontos = 0;
     
     while (!encerrou) {
         encerrou = queda();
@@ -74,14 +78,19 @@ int queda() {
 
         manipula_bloco(posX, posY, 1, cor);
         
-        scanf("%c", &input);
-        if (input == 'a') {
-            if ((posY-1 != -1) && (matriz_fixa[posX][posY-1] == 0)) {
+        //scanf("%c", &input);
+        if (kbhit()) {
+            input = getchar();
+            if (input == 'a') {
+                if ((posY-1 != -1) && (matriz_fixa[posX][posY-1] == 0)) {
                 move_para_lado(posX, &posY, -1, cor);
-            }
-        } else if (input == 'd') {
-            if ((posY+1 != COLUNAS) && (matriz_fixa[posX][posY+1] == 0)) {
+                }
+            } else if (input == 'd') {
+                if ((posY+1 != COLUNAS) && (matriz_fixa[posX][posY+1] == 0)) {
                 move_para_lado(posX, &posY, +1, cor);
+                }
+            } else if (input == 'p') {
+                pausar();
             }
         }
 
@@ -191,6 +200,17 @@ int sorteia_peca() {
     return rand() % 3 + 1;
 }
 
+void pausar() {}
+    printf("Jogo pausado. Pressione p novamente para continuar.\n");
+    char tecla;
+    do {
+        if (kbhit()) {
+            tecla = getchar();
+        }
+    } while (tecla != 'p');
+    printf("Jogo retomado!\n");
+
+
 /*
 Função: faz uma cópia entre duas matrizes, onde a matriz_a recebe os valores de matriz_b.
 Parâmetro: int (*matriz_a)[5] e int (*matriz_b)[5].
@@ -229,4 +249,25 @@ void imprime_matriz(int matriz[LINHAS][COLUNAS]) {
         printf("\n");
     }
     printf("\n");
+}
+
+// Função para detectar uma tecla pressionada sem precisar do 'Enter'
+int kbhit(void) {
+    struct termios oldt, newt;
+    int ch;
+    int oldf;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    fcntl(STDIN_FILENO, F_SETFL, oldf);
+    if (ch != EOF) {
+        ungetc(ch, stdin);
+        return 1;
+    }
+    return 0;
 }

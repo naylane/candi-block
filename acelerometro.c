@@ -98,3 +98,16 @@ uint8_t ler_i2c(uint8_t endereco_reg) {
    return valor;
 }
 
+void inicializar_adxl345() {
+   escrever_i2c(ADXL345_POWER_CTL, 0x00);
+   usleep(10000);
+   escrever_i2c(ADXL345_POWER_CTL, 0x08);
+   escrever_i2c(ADXL345_DATA_FORMAT, 0x00); // ±2g
+   escrever_i2c(ADXL345_BW_RATE, 0x0A);   // 100 Hz
+   escrever_i2c(ADXL345_INT_ENABLE, 0x80);
+   escrever_i2c(ADXL345_INT_MAP, 0x00);
+}
+
+uint8_t ler_adxl345_devid() {
+   return ler_i2c(ADXL345_DEVID);
+}

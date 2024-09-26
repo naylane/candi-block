@@ -33,3 +33,46 @@
 #define ADXL345_INT_MAP 0x2F
 #define ADXL345_INT_SOURCE 0x30
 #define ADXL345_BW_RATE 0x2C
+
+
+
+volatile uint32_t *base_hps;
+int mg_por_lsb = 4; 
+int16_t offset_x = 0;
+int fd;
+
+void escrever_registro(uint32_t endereco, uint32_t valor) {
+   *(volatile uint32_t*)(base_hps + (endereco - HPS_PHYS_BASE) / 4) = valor;
+}
+
+uint32_t ler_registro(uint32_t endereco) {
+   return *(volatile uint32_t*)(base_hps + (endereco - HPS_PHYS_BASE) / 4);
+}
+
+
+void inicializar_i2c() {
+   escrever_registro(SYSMGR_I2C0USEFPGA, 0);
+   escrever_registro(SYSMGR_GENERALIO7, 1);
+   escrever_registro(SYSMGR_GENERALIO8, 1);
+
+   escrever_registro(I2C0_ENABLE, 0x0);
+   escrever_registro(I2C0_CON, 0x65);
+   escrever_registro(I2C0_TAR, ADXL345_ADDR);
+
+   escrever_registro(I2C0_FS_SCL_HCNT, 60 + 30);
+   escrever_registro(I2C0_FS_SCL_LCNT, 130 + 30);
+  
+   escrever_registro(I2C0_ENABLE, 0x1);
+   usleep(10000);
+}
+
+void verificar_status_i2c() {
+   uint32_t status = ler_registro(I2C0_ENABLE);
+   printf("Status I2C: 0x%08X\n", status);
+   if (status & 0x1) {
+       printf("I2C habilitado\n");
+   } else {
+       printf("I2C nao habilitado\n");
+   }
+}
+

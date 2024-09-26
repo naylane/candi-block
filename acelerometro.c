@@ -99,7 +99,7 @@ uint8_t ler_i2c(uint8_t endereco_reg) {
    return valor;
 }
 
-void inicializar_adxl345() {
+void inicializar_acelerometro() {
    escrever_i2c(ADXL345_POWER_CTL, 0x00);
    usleep(10000);
    escrever_i2c(ADXL345_POWER_CTL, 0x08);
@@ -109,7 +109,7 @@ void inicializar_adxl345() {
    escrever_i2c(ADXL345_INT_MAP, 0x00);
 }
 
-uint8_t ler_adxl345_devid() {
+uint8_t ler_devid_acelerometro() {
    return ler_i2c(ADXL345_DEVID);
 }
 
@@ -158,7 +158,7 @@ int configurar_acelerometro(){
 
    int i;
    for (i = 0; i < 5; i++) {
-       devid = ler_adxl345_devid();
+       devid = ler_devid_acelerometro();
        printf("Tentativa %d - ADXL345 DEVID: 0x%02X\n", i+1, devid);
        if (devid == 0xE5) {
            break;
@@ -166,8 +166,8 @@ int configurar_acelerometro(){
        usleep(100000);
    }
 
-   inicializar_adxl345();
-   printf("ADXL345 inicializado\n");
+   inicializar_acelerometro();
+   printf("Acelerometro inicializado\n");
 
    printf("Calibrando acelerometro...\n");
    calibrar_acelerometro(&offset_x);
@@ -182,3 +182,20 @@ int desmapear_memoria(){
    return 0;
 }
 
+
+int get_direcao_movimento(){
+   int16_t x_bruto;
+   float x_g;
+
+   ler_aceleracao_x(&x_bruto);
+
+   x_g = (x_bruto - offset_x) * (mg_por_lsb / 1000.0);
+
+   if (x_g > FILTRO_MOVIMENTO) {
+      return 1;  // direita
+   } else if (x_g < -FILTRO_MOVIMENTO) {
+      return -1; // esquerda
+   } 
+   return 0; // sem movimento
+   
+}

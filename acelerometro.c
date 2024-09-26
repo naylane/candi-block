@@ -136,3 +136,49 @@ void calibrar_acelerometro(int16_t *offset_x) {
    printf("Calibracao completa. Offset: X=%d \n", *offset_x);
 }
 
+
+int configurar_acelerometro(){
+   uint8_t devid;
+
+   fd = open("/dev/mem", O_RDWR | O_SYNC);
+   if (fd < 0) {
+       printf("Erro ao abrir /dev/mem\n");
+       return -1;
+   }
+
+   base_hps = mmap(NULL, HPS_SPAN, PROT_READ | PROT_WRITE, MAP_SHARED, fd, HPS_PHYS_BASE);
+   if (base_hps == MAP_FAILED) {
+       printf("Erro ao mapear memoria\n");
+       close(fd);
+       return -1;
+   }
+
+   inicializar_i2c();
+   verificar_status_i2c();
+
+   int i;
+   for (i = 0; i < 5; i++) {
+       devid = ler_adxl345_devid();
+       printf("Tentativa %d - ADXL345 DEVID: 0x%02X\n", i+1, devid);
+       if (devid == 0xE5) {
+           break;
+       }
+       usleep(100000);
+   }
+
+   inicializar_adxl345();
+   printf("ADXL345 inicializado\n");
+
+   printf("Calibrando acelerometro...\n");
+   calibrar_acelerometro(&offset_x);
+   printf("Calibrado! Iniciando leituras de aceleracao...\n");
+
+   return 0;
+}
+
+int desmapear_memoria(){
+   munmap((void*)base_hps, HPS_SPAN);
+   close(fd);
+   return 0;
+}
+

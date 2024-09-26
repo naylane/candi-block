@@ -76,3 +76,14 @@ void verificar_status_i2c() {
    }
 }
 
+void ler_reg_acel(uint8_t address, uint8_t *value) {
+   escrever_registro(I2C0_DATA_CMD, address + 0x400);
+   escrever_registro(I2C0_DATA_CMD, 0x100);
+   while (ler_registro(I2C0_RXFLR) == 0) {}
+   *value = ler_registro(I2C0_DATA_CMD) & 0xFF;
+}
+
+void escrever_reg_acel(uint8_t address, uint8_t value) {
+   escrever_registro(I2C0_DATA_CMD, address + 0x400);
+   escrever_registro(I2C0_DATA_CMD, value);
+}

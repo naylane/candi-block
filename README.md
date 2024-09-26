@@ -1,12 +1,12 @@
-Projeto da disciplina TEC 499 - Sistemas Digitais.
 
 ## 🗒️ Sobre o Projeto
+Projeto da disciplina TEC 499 - Sistemas Digitais.
 O projeto se trata de uma diciplina da materia de sistemas digitais em que foi preciso fazer um jogo inspirado no Tetris;
 
 ## ⚙️ Funcionamento do nosso jogo
 O nosso jogo se chama Candy Block e sua lógica foi elaborado em uma mistura de tetris e candy crush. O agrupamento do jogo é por cores, então as peças caem cada uma de uma cor e o agrupamento ocorre em blocos de 4 cores iguais.
 
-## Nosso checklist
+## ✅ Nosso checklist
 ATIVIDADES GERAIS:
 * (ok) Exibição do tabuleiro com as bordas (já testado no LEDS)
 * (ok) Peças caindo em cores diferentes (já testado no LEDS)
@@ -29,10 +29,6 @@ BUGS ENCONTRADOS:
 * () fixar a peça
 
 ## 💻 Desenvolvedores
-<div align="center">  
-  <img align="center" width=10% src="https://github.com/brendatrindade/4vote-Readme/blob/main/imagens/simbolo%20nexustech%20colorida.png">
- </div>
- 
 <table>
   <tr>
     <td align="center"><img style="" src="https://avatars.githubusercontent.com/u/142849685?v=4" width="100px;" alt=""/><br /><sub><b> Brenda Araújo </b></sub></a><br />👨‍💻</a></td>

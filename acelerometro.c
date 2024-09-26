@@ -111,3 +111,13 @@ void inicializar_adxl345() {
 uint8_t ler_adxl345_devid() {
    return ler_i2c(ADXL345_DEVID);
 }
+
+void ler_aceleracao_x(int16_t *x) {
+   while(!dados_prontos());
+   *x = (ler_i2c(ADXL345_DATAX1) << 8) | ler_i2c(ADXL345_DATAX0);
+   ler_i2c(ADXL345_INT_SOURCE);
+}
+
+int dados_prontos() {
+   return (ler_i2c(ADXL345_INT_SOURCE) & 0x80) != 0;
+}

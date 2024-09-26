@@ -34,7 +34,8 @@
 #define ADXL345_INT_SOURCE 0x30
 #define ADXL345_BW_RATE 0x2C
 
-
+#define AMOSTRAS_CALIBRACAO 100
+#define FILTRO_MOVIMENTO 0.20
 
 volatile uint32_t *base_hps;
 int mg_por_lsb = 4; 
@@ -121,3 +122,17 @@ void ler_aceleracao_x(int16_t *x) {
 int dados_prontos() {
    return (ler_i2c(ADXL345_INT_SOURCE) & 0x80) != 0;
 }
+
+void calibrar_acelerometro(int16_t *offset_x) {
+   int32_t soma_x = 0;
+   int16_t x;
+   int i;
+ 
+   for (i = 0; i < AMOSTRAS_CALIBRACAO; i++) {
+       ler_aceleracao_x(&x);
+       soma_x += x;
+   }
+   *offset_x = soma_x / AMOSTRAS_CALIBRACAO;
+   printf("Calibracao completa. Offset: X=%d \n", *offset_x);
+}
+

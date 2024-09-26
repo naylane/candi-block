@@ -87,3 +87,14 @@ void escrever_reg_acel(uint8_t address, uint8_t value) {
    escrever_registro(I2C0_DATA_CMD, address + 0x400);
    escrever_registro(I2C0_DATA_CMD, value);
 }
+
+void escrever_i2c(uint8_t endereco_reg, uint8_t valor) {
+   escrever_reg_acel(endereco_reg, valor);
+}
+
+uint8_t ler_i2c(uint8_t endereco_reg) {
+   uint8_t valor;
+   ler_reg_acel(endereco_reg, &valor);
+   return valor;
+}
+

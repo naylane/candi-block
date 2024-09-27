@@ -37,38 +37,38 @@
 #define AMOSTRAS_CALIBRACAO 100
 #define FILTRO_MOVIMENTO 0.20
 
-volatile uint32_t *base_hps;
-int mg_por_lsb = 4; 
-int16_t offset_x = 0;
+volatile uint32_t *base_hps; //ponteiro para a memoria HPS mapeada
+int mg_por_lsb = 4; //mg por bit menos significativo para conversão
+int16_t offset_x = 0; //offset do eixo X para calibracao
 int fd;
 
-void escrever_registro(uint32_t endereco, uint32_t valor) {
-   *(volatile uint32_t*)(base_hps + (endereco - HPS_PHYS_BASE) / 4) = valor;
+void escrever_registrador(uint32_t endereco, uint32_t valor) {
+   *(volatile uint32_t*)(base_hps + (endereco - HPS_PHYS_BASE) / 4) = valor; //endereco inicial da regiao mapeada na memoria virtual + ( endereco do registrador na memoria fisica - endereco inicial da regiao mapeada na memoria fisica )
 }
 
-uint32_t ler_registro(uint32_t endereco) {
+uint32_t ler_registrador(uint32_t endereco) {
    return *(volatile uint32_t*)(base_hps + (endereco - HPS_PHYS_BASE) / 4);
 }
 
 
 void inicializar_i2c() {
-   escrever_registro(SYSMGR_I2C0USEFPGA, 0);
-   escrever_registro(SYSMGR_GENERALIO7, 1);
-   escrever_registro(SYSMGR_GENERALIO8, 1);
+   escrever_registrador(SYSMGR_I2C0USEFPGA, 0); //HPS
+   escrever_registrador(SYSMGR_GENERALIO7, 1); //I2C
+   escrever_registrador(SYSMGR_GENERALIO8, 1); //I2C
 
-   escrever_registro(I2C0_ENABLE, 0x0);
-   escrever_registro(I2C0_CON, 0x65);
-   escrever_registro(I2C0_TAR, ADXL345_ADDR);
+   escrever_registrador(I2C0_ENABLE, 0x0); // Desabilita
+   escrever_registrador(I2C0_CON, 0x65); //Mestre, modo rapido 400kbit/s, enderecamento 7 bits
+   escrever_registrador(I2C0_TAR, ADXL345_ADDR);//destino acelerometro
 
-   escrever_registro(I2C0_FS_SCL_HCNT, 60 + 30);
-   escrever_registro(I2C0_FS_SCL_LCNT, 130 + 30);
+   escrever_registrador(I2C0_FS_SCL_HCNT, 60 + 30);
+   escrever_registrador(I2C0_FS_SCL_LCNT, 130 + 30);
   
-   escrever_registro(I2C0_ENABLE, 0x1);
+   escrever_registrador(I2C0_ENABLE, 0x1); //Habilita
    usleep(10000);
 }
 
 void verificar_status_i2c() {
-   uint32_t status = ler_registro(I2C0_ENABLE);
+   uint32_t status = ler_registrador(I2C0_ENABLE);
    printf("Status I2C: 0x%08X\n", status);
    if (status & 0x1) {
        printf("I2C habilitado\n");
@@ -77,16 +77,16 @@ void verificar_status_i2c() {
    }
 }
 
-void ler_reg_acel(uint8_t address, uint8_t *value) {
-   escrever_registro(I2C0_DATA_CMD, address + 0x400);
-   escrever_registro(I2C0_DATA_CMD, 0x100);
-   while (ler_registro(I2C0_RXFLR) == 0) {}
-   *value = ler_registro(I2C0_DATA_CMD) & 0xFF;
+void ler_reg_acel(uint8_t endereco, uint8_t *valor) {
+   escrever_registrador(I2C0_DATA_CMD, endereco + 0x400); //endereco e sinal Start
+   escrever_registrador(I2C0_DATA_CMD, 0x100); //sinal de leitura
+   while (ler_registrador(I2C0_RXFLR) == 0) {} //aguarda até que o buffer de recepcao nao esteja vazio
+   *valor = ler_registrador(I2C0_DATA_CMD) & 0xFF; //0b11111111 - le os bits LSB do reg 7-0 escritos em dat 
 }
 
-void escrever_reg_acel(uint8_t address, uint8_t value) {
-   escrever_registro(I2C0_DATA_CMD, address + 0x400);
-   escrever_registro(I2C0_DATA_CMD, value);
+void escrever_reg_acel(uint8_t endereco, uint8_t valor) {
+   escrever_registrador(I2C0_DATA_CMD, endereco + 0x400);// endereco e sinal start
+   escrever_registrador(I2C0_DATA_CMD, valor); //valor para ser escrito
 }
 
 void escrever_i2c(uint8_t endereco_reg, uint8_t valor) {
@@ -100,13 +100,13 @@ uint8_t ler_i2c(uint8_t endereco_reg) {
 }
 
 void inicializar_acelerometro() {
-   escrever_i2c(ADXL345_POWER_CTL, 0x00);
+   escrever_i2c(ADXL345_POWER_CTL, 0x00); //standby
    usleep(10000);
-   escrever_i2c(ADXL345_POWER_CTL, 0x08);
+   escrever_i2c(ADXL345_POWER_CTL, 0x08); //modo medicao
    escrever_i2c(ADXL345_DATA_FORMAT, 0x00); // ±2g
    escrever_i2c(ADXL345_BW_RATE, 0x0A);   // 100 Hz
-   escrever_i2c(ADXL345_INT_ENABLE, 0x80);
-   escrever_i2c(ADXL345_INT_MAP, 0x00);
+   escrever_i2c(ADXL345_INT_ENABLE, 0x80); //habilita interrupcao de dados prontos
+   escrever_i2c(ADXL345_INT_MAP, 0x00); //mapeia interrupcao 
 }
 
 uint8_t ler_devid_acelerometro() {
@@ -114,13 +114,13 @@ uint8_t ler_devid_acelerometro() {
 }
 
 void ler_aceleracao_x(int16_t *x) {
-   while(!dados_prontos());
-   *x = (ler_i2c(ADXL345_DATAX1) << 8) | ler_i2c(ADXL345_DATAX0);
-   ler_i2c(ADXL345_INT_SOURCE);
+   while(!dados_prontos()); //aguarda novos dados
+   *x = (ler_i2c(ADXL345_DATAX1) << 8) | ler_i2c(ADXL345_DATAX0); //le e combina em 16bits os dados MSB e LSB do eixo x
+   ler_i2c(ADXL345_INT_SOURCE); //limpa interrupcoes detectadas
 }
 
 int dados_prontos() {
-   return (ler_i2c(ADXL345_INT_SOURCE) & 0x80) != 0;
+   return (ler_i2c(ADXL345_INT_SOURCE) & 0x80) != 0; //0b10000000 - verifica o bit 7 data_ready
 }
 
 void calibrar_acelerometro(int16_t *offset_x) {
@@ -132,7 +132,7 @@ void calibrar_acelerometro(int16_t *offset_x) {
        ler_aceleracao_x(&x);
        soma_x += x;
    }
-   *offset_x = soma_x / AMOSTRAS_CALIBRACAO;
+   *offset_x = soma_x / AMOSTRAS_CALIBRACAO; //calcula a media de leituras obtidas por x
    printf("Calibracao completa. Offset: X=%d \n", *offset_x);
 }
 
@@ -140,13 +140,13 @@ void calibrar_acelerometro(int16_t *offset_x) {
 int configurar_acelerometro(){
    uint8_t devid;
 
-   fd = open("/dev/mem", O_RDWR | O_SYNC);
+   fd = open("/dev/mem", O_RDWR | O_SYNC); // Abre o /dev/mem para o mapeamento de memoria
    if (fd < 0) {
        printf("Erro ao abrir /dev/mem\n");
        return -1;
    }
 
-   base_hps = mmap(NULL, HPS_SPAN, PROT_READ | PROT_WRITE, MAP_SHARED, fd, HPS_PHYS_BASE);
+   base_hps = mmap(NULL, HPS_SPAN, PROT_READ | PROT_WRITE, MAP_SHARED, fd, HPS_PHYS_BASE); // Mapeia a memoria HPS
    if (base_hps == MAP_FAILED) {
        printf("Erro ao mapear memoria\n");
        close(fd);

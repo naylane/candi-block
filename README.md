@@ -19,6 +19,20 @@ O nosso jogo se chama Candy Block e sua lógica foi elaborado em uma mistura de 
 ### Descrição dos testes de funcionamento do sistema, bem como, análise dos resultados alcançados
 
 
+## Tecnologias e Ferramentas
+**Hardwares**   
+Kit de Desenvolvimento DE1-SoC   
+Monitor   
+**Linguagem de Programação**    
+C   
+**Ambiente de Desenvolvimento**   
+Visual Studio Code   
+**Compilador**   
+GCC   
+**Controle de Versão**   
+Git     
+**Ferramenta de Sistema**   
+Terminal Linux   
 
 
 ## ✅ Nosso checklist
@@ -43,7 +57,7 @@ BUGS ENCONTRADOS:
 * () peças fazendo a quebra de linha errada
 * () fixar a peça
 
-## 💻 Desenvolvedores
+## 💻 Desenvolvedoras
 <table>
   <tr>
     <td align="center"><img style="" src="https://avatars.githubusercontent.com/u/142849685?v=4" width="100px;" alt=""/><br /><sub><b> Brenda Araújo </b></sub></a><br />👨‍💻</a></td>

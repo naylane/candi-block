@@ -27,7 +27,19 @@ O nosso jogo se chama Candi Block e sua lógica foi elaborado em uma mistura de 
 - Requisitos
 
 ## Arquitetura do Kit de Desenvolvimento DE1-SoC
-.
+
+## Acelerômetro ADXL345
+
+### Comunicação utilizando acesso direto à memória
+Processo de comunicação com o acelerômetro ADXL345 na placa DE1-SoC, desde as configurações iniciais até a leitura dos dados de aceleração, implementado em linguagem C para interagir diretamente com o hardware. 
+
+<div align="center">  
+  <img align="center" width=50% src="https://github.com/naylane/Tetris/blob/main/img/anima%C3%A7%C3%A3o%20adxl345%20(2).gif" alt="Comunicacao ADXL345">
+</div>
+
+### Funções
+
+
 
 ## Testes
 Descrição dos testes de funcionamento do sistema, bem como, análise dos resultados alcançados

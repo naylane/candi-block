@@ -27,7 +27,14 @@ O nosso jogo se chama Candi Block e sua lógica foi elaborado em uma mistura de 
 - Requisitos
 
 ## Arquitetura do Kit de Desenvolvimento DE1-SoC
+O Kit de Desenvolvimento DE1-SoC ostenta uma plataforma de design de hardware robusta com base no FPGA System-on-Chip (SoC) da Altera, que combina núcleos embarcados dual-core Cortex-A9 com lógica programável, oferecendo máxima flexibilidade de design. Dispondo do poder da reconfigurabilidade aliado a um sistema de processador de alto desempenho e baixo consumo de energia. 
 
+O System-on-Chip (SoC) da Altera integra um sistema de processador (HPS) baseado em ARM, composto por processador, periféricos e interfaces de memória conectados de forma integrada à estrutura FPGA, utilizando interconexão de alta largura de banda. Incluindo hardwares como memória DDR3 de alta velocidade, recursos de áudio e vídeo, rede Ethernet, entre outros.
+
+<div align="center">  
+  <img align="center" width=60% src="https://github.com/naylane/Tetris/blob/main/img/kit%20de1soc.png" alt="Placa DE1-Soc">
+  <p><em>Placa de Desenvolvimento DE1-SoC</em></p>
+</div>
 
 ## Acelerômetro ADXL345
 A placa DE1-SoC está equipada com um módulo sensor de acelerômetro digital, o ADXL345, também conhecido como G-sensor. Trata-se de um acelerômetro de 3 eixos, pequeno, fino, com ultrabaixo consumo de energia e medição de alta resolução. Dispondo de faixas de medição selecionáveis de ±2 g, ±4 g, ±8 g ou ±16 g, proporcionando uma capacidade de detecção da aceleração crescente à medida que a faixa de medição aumenta. Os dados de saída são digitalizados em um formato de 16 bits em complemento de dois e podem ser acessados por meio de interfaces digitais SPI ou I2C.

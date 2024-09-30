@@ -24,7 +24,17 @@ Apresentação do jogo aqui*
 O nosso jogo se chama Candi Block e sua lógica foi elaborado em uma mistura de Tetris e Candy crush. O agrupamento do jogo é por cores, então as peças caem cada uma de uma cor e o agrupamento ocorre em blocos de 4 cores iguais.
 
 ## Requisitos
-- Requisitos
+O projeto consiste no desenvolvimento de um jogo inspirado no pioneiro Tetris utilizando o Kit de Desenvolvimento DE1-SoC, no qual o movimento do jogador é captado pelo ```acelerômetro``` presente no Kit, a interação com o jogo inclui as ações de ```iniciar, pausar, continuar e encerrar``` controladas por ```chaves(switches)``` disponíveis na placa e a exibição do jogo em um monitor realizada através da ```interface VGA```.
+
+Sendo necessário atender aos seguintes requisitos:
+
+- O código deve ser escrito em linguagem C
+- O sistema só poderá utilizar os componentes disponíveis na placa
+- Não é permitido o uso de bibliotecas para o acelerômetro
+- O usuário não muda a orientação das peças
+- O jogo deve pontuar e eliminar agrupamentos
+
+Abrangendo a compreensão e aplicação do conjunto de instruções da arquitetura, técnicas de programação, desenvolvimento de sistemas embarcados, bem como acesso direto à memória e integração do acelerômetro para captar os movimentos do jogador e controlar as peças. 
 
 ## Arquitetura do Kit de Desenvolvimento DE1-SoC
 O Kit de Desenvolvimento DE1-SoC ostenta uma plataforma de design de hardware robusta com base no FPGA System-on-Chip (SoC) da Altera, que combina núcleos embarcados dual-core Cortex-A9 com lógica programável, oferecendo máxima flexibilidade de design. Dispondo do poder da reconfigurabilidade aliado a um sistema de processador de alto desempenho e baixo consumo de energia. 

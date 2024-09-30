@@ -11,7 +11,9 @@
 - [Requisitos](#Requisitos)
 - [Arquitetura do Kit de Desenvolvimento DE1-SoC](#Arquitetura-do-Kit-de-Desenvolvimento-DE1-SoC)
   - [Acelerômetro ADXL345](#Acelerômetro-ADXL345)
-  - [Interface VGA e Exibição](#Interface-VGA-e-Exibição)
+- [Desenvolvimento em C](#Desenvolvimento-em-C)
+    - [Comunicação utilizando acesso direto à memória](#Comunicação-utilizando-acesso-direto-à-memória)
+    - [Interface VGA e Exibição](#Interface-VGA-e-Exibição)
 - [Testes](#Testes)
 - [Tecnologias e Ferramentas utilizadas](#Tecnologias-e-Ferramentas-utilizadas)
 - [Configurações de Ambiente e Execução](#Configurações-de-Ambiente-e-Execução)
@@ -21,6 +23,10 @@
 
 ## Visão Geral do Projeto
 O nosso jogo se chama Candi Block e sua lógica foi elaborado em uma mistura de Tetris e Candy crush. O agrupamento do jogo é por cores, então as peças caem cada uma de uma cor e o agrupamento ocorre em blocos de 4 cores iguais.
+<div align="center">  
+  <img align="center" width=60% src="https://github.com/naylane/candi-block/blob/main/img/funcionamento-geral.gif" alt="Funcionamento Geral">
+  <p><em>Lógica do Candi Block</em></p>
+</div>
 
 
 ## Requisitos
@@ -42,7 +48,7 @@ O Kit de Desenvolvimento DE1-SoC ostenta uma plataforma de design de hardware ro
 O System-on-Chip (SoC) da Altera integra um sistema de processador (HPS) baseado em ARM, composto por processador, periféricos e interfaces de memória conectados de forma integrada à estrutura FPGA, utilizando interconexão de alta largura de banda. Incluindo hardwares como memória DDR3 de alta velocidade, recursos de áudio e vídeo, rede Ethernet, entre outros.
 
 <div align="center">  
-  <img align="center" width=60% src="https://github.com/naylane/Tetris/blob/main/img/kit%20de1soc.png" alt="Placa DE1-Soc">
+  <img align="center" width=60% src="https://github.com/naylane/candi-block/blob/main/img/kit%20de1soc.png" alt="Placa DE1-Soc">
   <p><em>Placa de Desenvolvimento DE1-SoC</em></p>
 </div>
 
@@ -54,13 +60,15 @@ Para que os usuários desfrutem de máxima flexibilidade, todas as conexões sã
   <p><em>Diagrama de Blocos</em></p>
 </div>
 
-
-## Acelerômetro ADXL345
+### Acelerômetro ADXL345
 A placa DE1-SoC está equipada com um módulo sensor de acelerômetro digital, o ADXL345, também conhecido como G-sensor. Trata-se de um acelerômetro de 3 eixos, pequeno, fino, com ultra baixo consumo de energia e medição de alta resolução. Dispondo de faixas de medição selecionáveis de ±2 g, ±4 g, ±8 g ou ±16 g, proporcionando uma capacidade de detecção da aceleração crescente à medida que a faixa de medição aumenta. Os dados de saída são digitalizados em um formato de 16 bits em complemento de dois e podem ser acessados por meio de interfaces digitais SPI ou I2C.
 
 O ADXL345 é capaz de medir tanto a aceleração estática da gravidade em aplicações de detecção de inclinação, quanto a aceleração dinâmica resultante de movimento ou choque. Sua alta resolução de 3,9 mg/LSB permite a medição de mudanças de inclinação menores que 1,0°, o que o torna ideal para aplicações em dispositivos móveis. 
 
 Além disso, possui modos de baixo consumo que permitem um gerenciamento inteligente de energia baseado em movimento, com detecção de limiar e medição de aceleração ativa com dissipação de energia extremamente baixa, tornando-o altamente eficiente.
+
+
+## Desenvolvimento em C
 
 ### Comunicação utilizando acesso direto à memória
 Processo de comunicação com o acelerômetro ADXL345 na placa DE1-SoC, desde as configurações iniciais até a leitura e interpretação dos dados de aceleração, implementada em linguagem C para interagir diretamente com o hardware. 
@@ -70,8 +78,7 @@ Processo de comunicação com o acelerômetro ADXL345 na placa DE1-SoC, desde as
   <p><em>Comunicação com o acelerômetro ADXL345</em></p>
 </div>
 
-
-## Interface VGA e Exibição
+### Interface VGA e Exibição
 Para o desenvolvimento do código em C, tivemos que analisar uma lógica de exibição no VGA. Dessa forma, escolhemos pegar um retângulo no VGA com 180 de altura e 100 de comprimento (esses valores foram decisão de projeto, mas poderia ser com quaisquer valores) e pensar nesse retângulo como a nossa matriz que iriamos manipular no codigo.
 
 Assim, preenchemos esse retangulo com blocos de tamanho 5x5 (também decisão de projeto) e verificamos que cabiam um total de 720 blocos. Se temos um retangulo com 180 de altura e cada bloco tem tamanho 5, logo cabem 36 blocos na altura, ou seja, 36 linhas na nossa matriz de manipulação. O mesmo para as colunas, se temos uma largura de 100 com blocos de tamanho 5 então cabem 20 blocos nas colunas desse retangulo, logo temos 20 colunas na nossa matriz de manipulação. 

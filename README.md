@@ -1,61 +1,50 @@
+<h1 align="center">
+  <br>
+  <img src="https://github.com/naylane/Tetris/blob/main/img/Candi-Block.png" alt="Candi Block" width="650"></a>
+  <br>
+  Candi Block
+  <br>
+</h1>
 
-## 🗒️ Sobre o Projeto
-Projeto da disciplina TEC 499 - Sistemas Digitais.
-O projeto se trata de uma diciplina da materia de sistemas digitais em que foi preciso fazer um jogo inspirado no Tetris;
+<h4 align="center">Projeto da disciplina TEC 499 - Sistemas Digitais.</h4>
 
-## Apresentação do jogo aqui
+Apresentação do jogo aqui*
 
-## ⚙️ Funcionamento do nosso jogo
-O nosso jogo se chama Candy Block e sua lógica foi elaborado em uma mistura de tetris e candy crush. O agrupamento do jogo é por cores, então as peças caem cada uma de uma cor e o agrupamento ocorre em blocos de 4 cores iguais.
+## Sumário
+- [Visão Geral do Projeto](#Visão-Geral-do-Projeto)
+- [Requisitos](#Requisitos)
+- [Arquitetura do Kit de Desenvolvimento DE1-SoC](#Arquitetura-do-Kit-de-Desenvolvimento-DE1-SoC)
+- [Testes](#Testes)
+- [Tecnologias e Ferramentas utilizadas](#Tecnologias-e-Ferramentas-utilizadas)
+- [Instalação](#Instalação)
+- [Desenvolvedoras](#Desenvolvedoras)
+- [Referências](#Referências)
 
-## Requisitos do jogo aqui
+## Visão Geral do Projeto
+O nosso jogo se chama Candi Block e sua lógica foi elaborado em uma mistura de Tetris e Candy crush. O agrupamento do jogo é por cores, então as peças caem cada uma de uma cor e o agrupamento ocorre em blocos de 4 cores iguais.
 
-## Script de compilação tipo Makefile para geração do código executável
+## Requisitos
+- Requisitos
 
-## Documentação técnica escrita no arquivo READ.ME do projeto no GitHub, contendo, no mínimo:
-### Detalhamento dos software usados no trabalho, incluindo softwares básicos;
-### Arquitetura do computador usado nos testes;
-### Descrição de instalação, configuração de ambiente e execução;
-### Descrição dos testes de funcionamento do sistema, bem como, análise dos resultados alcançados
+## Arquitetura do Kit de Desenvolvimento DE1-SoC
+.
 
+## Testes
+Descrição dos testes de funcionamento do sistema, bem como, análise dos resultados alcançados
 
-## Tecnologias e Ferramentas
-**Hardwares**   
-Kit de Desenvolvimento DE1-SoC   
-Monitor   
-**Linguagem de Programação**    
-C   
-**Ambiente de Desenvolvimento**   
-Visual Studio Code   
-**Compilador**   
-GCC   
-**Controle de Versão**   
-Git     
-**Ferramenta de Sistema**   
-Terminal Linux   
+## Tecnologias e Ferramentas utilizadas
+- **Hardwares:**   
+  - Kit de Desenvolvimento DE1-SoC
+  - Monitor   
+- **Linguagem de Programação:** C   
+- **Ambiente de Desenvolvimento:** Visual Studio Code   
+- **Compilador:** GCC   
+- **Controle de Versão:** Git     
+- **Ferramenta de Sistema:** Terminal Linux
 
-
-## ✅ Nosso checklist
-ATIVIDADES GERAIS:
-* (ok) Exibição do tabuleiro com as bordas (já testado no LEDS)
-* (ok) Peças caindo em cores diferentes (já testado no LEDS)
-* (ok) Peças se movendo pra um lado e outro (já testado no LEDS)
-* (ok) Peças quebra de linha (já testado no LEDS)
-* (ok) contar pontuação (já testado no LEDS)
-* (ok) fazer tela inicial - op
-* (ok) pause com chave SW01 (já testado no LEDS)
-* (ok) fazer o game começar pela chave SW00  (já testado no LEDS
-* (ok) pegar coordenada x do acelerometro (já testado no LEDS)
-* (ok) calibrar acelerometro (já testado no LEDS)
-* (ok) conectar acelerometro com o Jogo (já testado no LEDS)
-* (ok) as peças de cima caindo quando houver quebra de linha
-* (ok) contando pontuação (já testado no LEDS)
-* (ok) exibir pontuação na tela
-
-BUGS ENCONTRADOS:
-* (ok) peça indo pras bordas 
-* () peças fazendo a quebra de linha errada
-* () fixar a peça
+## Instalação
+Script de compilação tipo Makefile para geração do código executável
+Descrição de instalação, configuração de ambiente e execução;
 
 ## 💻 Desenvolvedoras
 <table>
@@ -66,5 +55,5 @@ BUGS ENCONTRADOS:
   </tr>
 </table>
 
-
-
+## Referências
+- [1] FPGAcademy. (2024). https://fpgacademy.org/

@@ -1,4 +1,4 @@
 all:
 	clear
-	gcc -o main.c -lintelfpgaup
+	gcc main.c -o main -lintelfpgaup
 	sudo ./main

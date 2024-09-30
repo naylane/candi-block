@@ -28,18 +28,21 @@ O nosso jogo se chama Candi Block e sua lógica foi elaborado em uma mistura de 
 
 ## Arquitetura do Kit de Desenvolvimento DE1-SoC
 
+
 ## Acelerômetro ADXL345
+A placa DE1-SoC está equipada com um módulo sensor de acelerômetro digital, o ADXL345, também conhecido como G-sensor. Trata-se de um acelerômetro de 3 eixos, pequeno, fino, com ultrabaixo consumo de energia e medição de alta resolução. Dispondo de faixas de medição selecionáveis de ±2 g, ±4 g, ±8 g ou ±16 g, proporcionando uma capacidade de detecção da aceleração crescente à medida que a faixa de medição aumenta. Os dados de saída são digitalizados em um formato de 16 bits em complemento de dois e podem ser acessados por meio de interfaces digitais SPI ou I2C.
+
+O ADXL345 é capaz de medir tanto a aceleração estática da gravidade em aplicações de detecção de inclinação, quanto a aceleração dinâmica resultante de movimento ou choque. Sua alta resolução de 3,9 mg/LSB permite a medição de mudanças de inclinação menores que 1,0°, o que o torna ideal para aplicações em dispositivos móveis. 
+
+Além disso, possui modos de baixo consumo que permitem um gerenciamento inteligente de energia baseado em movimento, com detecção de limiar e medição de aceleração ativa com dissipação de energia extremamente baixa, tornando-o altamente eficiente.
 
 ### Comunicação utilizando acesso direto à memória
-Processo de comunicação com o acelerômetro ADXL345 na placa DE1-SoC, desde as configurações iniciais até a leitura dos dados de aceleração, implementado em linguagem C para interagir diretamente com o hardware. 
+Processo de comunicação com o acelerômetro ADXL345 na placa DE1-SoC, desde as configurações iniciais até a leitura e interpretação dos dados de aceleração, implementado em linguagem C para interagir diretamente com o hardware. 
 
 <div align="center">  
   <img align="center" width=50% src="https://github.com/naylane/Tetris/blob/main/img/anima%C3%A7%C3%A3o%20adxl345%20(2).gif" alt="Comunicacao ADXL345">
+  <p><em>Comunicação com o acelerômetro ADXL345</em></p>
 </div>
-
-### Funções
-
-
 
 ## Testes
 Descrição dos testes de funcionamento do sistema, bem como, análise dos resultados alcançados

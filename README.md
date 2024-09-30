@@ -16,7 +16,7 @@ Apresentação do jogo aqui*
 - [Arquitetura do Kit de Desenvolvimento DE1-SoC](#Arquitetura-do-Kit-de-Desenvolvimento-DE1-SoC)
 - [Testes](#Testes)
 - [Tecnologias e Ferramentas utilizadas](#Tecnologias-e-Ferramentas-utilizadas)
-- [Instalação](#Instalação)
+- [Configurações de Ambiente e Execução](#Configurações-de-Ambiente-e-Execução)
 - [Desenvolvedoras](#Desenvolvedoras)
 - [Referências](#Referências)
 
@@ -83,11 +83,28 @@ Descrição dos testes de funcionamento do sistema, bem como, análise dos resul
 - **Controle de Versão:** Git     
 - **Ferramenta de Sistema:** Terminal Linux
 
-## Instalação
-Script de compilação tipo Makefile para geração do código executável
-Descrição de instalação, configuração de ambiente e execução;
+## Configurações de Ambiente e Execução
+Para ter acesso ao projeto, clone o repositório disponível na plataforma GitHub utilizando o seguinte comando no terminal Linux:
+```bash
+git clone https://github.com/naylane/candi-block.git
+```
+Após clonar o repositório, conecte-se à placa via SSH utilizando o seu respectivo IP. Por exemplo, se o IP for `10.0.0.120`, use o seguinte comando:
+```bash
+ssh aluno@10.0.0.120
+```
+Em seguida, transfira a pasta clonada do seu computador para o sistema de arquivos da placa:
+```bash
+mv candi-block/[caminho do destino]
+```
+Para compilar e executar o projeto desenvolvido, navegue até o diretório onde está o repositório e execute o comando:
+```bash
+make
+```
+O comando `make` gerará o arquivo de compilação e o executará. Se a operação for bem-sucedida, a tela inicial do Candi Block deverá aparecer no monitor ao qual a placa está conectada.
+<br>
+⚠️ **Observação:** para seguir esse passo a passo será necessário saber a senha do usuário `aluno`.
 
-## 💻 Desenvolvedoras
+## Desenvolvedoras
 <table>
   <tr>
     <td align="center"><img style="" src="https://avatars.githubusercontent.com/u/142849685?v=4" width="100px;" alt=""/><br /><sub><b> Brenda Araújo </b></sub></a><br />👨‍💻</a></td>
@@ -97,4 +114,4 @@ Descrição de instalação, configuração de ambiente e execução;
 </table>
 
 ## Referências
-- [1] FPGAcademy. (2024). https://fpgacademy.org/
+- [1] FPGAcademy. (2024) https://fpgacademy.org/

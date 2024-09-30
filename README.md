@@ -46,7 +46,7 @@ Para que os usuários desfrutem de máxima flexibilidade, todas as conexões sã
 
 
 ## Acelerômetro ADXL345
-A placa DE1-SoC está equipada com um módulo sensor de acelerômetro digital, o ADXL345, também conhecido como G-sensor. Trata-se de um acelerômetro de 3 eixos, pequeno, fino, com ultrabaixo consumo de energia e medição de alta resolução. Dispondo de faixas de medição selecionáveis de ±2 g, ±4 g, ±8 g ou ±16 g, proporcionando uma capacidade de detecção da aceleração crescente à medida que a faixa de medição aumenta. Os dados de saída são digitalizados em um formato de 16 bits em complemento de dois e podem ser acessados por meio de interfaces digitais SPI ou I2C.
+A placa DE1-SoC está equipada com um módulo sensor de acelerômetro digital, o ADXL345, também conhecido como G-sensor. Trata-se de um acelerômetro de 3 eixos, pequeno, fino, com ultra baixo consumo de energia e medição de alta resolução. Dispondo de faixas de medição selecionáveis de ±2 g, ±4 g, ±8 g ou ±16 g, proporcionando uma capacidade de detecção da aceleração crescente à medida que a faixa de medição aumenta. Os dados de saída são digitalizados em um formato de 16 bits em complemento de dois e podem ser acessados por meio de interfaces digitais SPI ou I2C.
 
 O ADXL345 é capaz de medir tanto a aceleração estática da gravidade em aplicações de detecção de inclinação, quanto a aceleração dinâmica resultante de movimento ou choque. Sua alta resolução de 3,9 mg/LSB permite a medição de mudanças de inclinação menores que 1,0°, o que o torna ideal para aplicações em dispositivos móveis. 
 

@@ -95,19 +95,19 @@ Com essa lógica podemos pensar em cada elemento da matriz sendo um bloco, tendo
 ## Testes
 Nós realizamos cinco testes para a verificação efetiva do funcionamento do jogo, bem como para garantir que todos os requisitos estavam sendo previamente atendidos.
 
-**Caso de Teste 1: Jogo inicia, peça faz agrupamento e pontua.**
+- **Caso de Teste 1: Jogo inicia, peça faz agrupamento e pontua.**
 Este caso de teste visou verificar o início do jogo utilizando as chaves da placa (SW0), bem como a efetiva funcionalidade do código feito para obter as informações do eixo X do acelerômetro presente na placa. Além disso, buscou também verificar a contagem de pontos e o agrupamento funcionando corretamente no VGA, onde, quando um agrupamento era realizado, ele desaparecia.
 
-**Caso de Teste 2: Jogo é pausado e em seguida retomado.**
+- **Caso de Teste 2: Jogo é pausado e em seguida retomado.**
 Este caso visou verificar a funcionalidade de pausa presente no jogo, usando as chaves da placa (SW01).
 
-**Caso de Teste 3: Acontece uma quebra do agrupamento e as peças descem.**
+- **Caso de Teste 3: Acontece uma quebra do agrupamento e as peças descem.**
 Este caso visou verificar o correto funcionamento da quebra de linha. Quando ocorre um agrupamento de quatro quadrados de cores iguais, o agrupamento desaparecia, e as peças que estavam em cima desciam (caso houvesse peças acima).
 
-**Caso de Teste 4: Peças são empilhadas e atingem o topo.**
+- **Caso de Teste 4: Peças são empilhadas e atingem o topo.**
 Este caso verificou se, quando as peças atingiam o topo, o jogo era efetivamente finalizado e o jogador perdia, mantendo sua pontuação até o momento.
 
-**Caso de Teste 5: Jogo é encerrado com a chave.**
+- **Caso de Teste 5: Jogo é encerrado com a chave.**
 Este caso verificou se, utilizando a chave SW0, o jogo era efetivamente finalizado.
 
 Dessa forma, esses cinco casos de teste tiveram o objetivo de cobrir os requisitos solicitados e verificar o cumprimento deles, bem como a lógica e o funcionamento do jogo. Assim, analisando os resultados alcançados, podemos concluir que o jogo (Codi Block) passou por esses cinco casos de teste sem pendências e cumpre todos os requisitos que foram solicitados.

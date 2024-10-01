@@ -110,7 +110,7 @@ Este caso verificou se, quando as peças atingiam o topo, o jogo era efetivament
 - **Caso de Teste 5: Jogo é encerrado com a chave.**
 Este caso verificou se, utilizando a chave SW0, o jogo era efetivamente finalizado.
 
-Dessa forma, esses cinco casos de teste tiveram o objetivo de cobrir os requisitos solicitados e verificar o cumprimento deles, bem como a lógica e o funcionamento do jogo. Assim, analisando os resultados alcançados, podemos concluir que o jogo (Codi Block) passou por esses cinco casos de teste sem pendências e cumpre todos os requisitos que foram solicitados.
+Dessa forma, esses cinco casos de teste tiveram o objetivo de cobrir os requisitos solicitados e verificar o cumprimento deles, bem como a lógica e o funcionamento do jogo. Assim, analisando os resultados alcançados, podemos concluir que o jogo passou por esses cinco casos de teste sem pendências e cumpre todos os requisitos que foram solicitados.
 
 ## Tecnologias e Ferramentas utilizadas
 - **Hardwares:**   

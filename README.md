@@ -79,23 +79,43 @@ Processo de comunicação com o acelerômetro ADXL345 na placa DE1-SoC, desde as
 </div>
 
 ### Interface VGA e Exibição
-Para o desenvolvimento do código em C, tivemos que analisar uma lógica de exibição no VGA. Dessa forma, escolhemos pegar um retângulo no VGA com 180 de altura e 100 de comprimento (esses valores foram decisão de projeto, mas poderia ser com quaisquer valores) e pensar nesse retângulo como a nossa matriz que iriamos manipular no codigo.
+Para o desenvolvimento do código em C, tivemos que analisar uma lógica de exibição no VGA. Dessa forma, escolhemos pegar um retângulo no VGA com 180 de altura e 100 de comprimento (esses valores foram decisão de projeto, mas poderia ser com quaisquer valores) e pensar nesse retângulo como a nossa matriz que iriamos manipular no código.
 
-Assim, preenchemos esse retangulo com blocos de tamanho 5x5 (também decisão de projeto) e verificamos que cabiam um total de 720 blocos. Se temos um retangulo com 180 de altura e cada bloco tem tamanho 5, logo cabem 36 blocos na altura, ou seja, 36 linhas na nossa matriz de manipulação. O mesmo para as colunas, se temos uma largura de 100 com blocos de tamanho 5 então cabem 20 blocos nas colunas desse retangulo, logo temos 20 colunas na nossa matriz de manipulação. 
+Assim, preenchemos esse retangulo com blocos de tamanho 5x5 (também decisão de projeto) e verificamos que cabiam um total de 720 blocos. Se temos um retângulo com 180 de altura e cada bloco tem tamanho 5, logo cabem 36 blocos na altura, ou seja, 36 linhas na nossa matriz de manipulação. O mesmo para as colunas, se temos uma largura de 100 com blocos de tamanho 5 então cabem 20 blocos nas colunas desse retangulo, logo temos 20 colunas na nossa matriz de manipulação. 
 
 Então os 720 blocos que cabem ao total na nossa mtriz se referem exatamente aos 720 elementos da nossa matriz de tamanho 36 linhas e 20 colunas.
 
-Com essa logica podemos pensar em cada elemento da matriz sendo um bloco, tendo uma matriz de 720 elementos, e quando fazemos uma alteração dentro de um elemento dessa matriz, alteramos a sua vizualização no VGA.
+Com essa lógica podemos pensar em cada elemento da matriz sendo um bloco, tendo uma matriz de 720 elementos, e quando fazemos uma alteração dentro de um elemento dessa matriz, alteramos a sua vizualização no VGA.
 
 <div align="center">  
   <img align="center" width=80% src="https://github.com/naylane/candi-block/blob/main/img/exibicao.gif" alt="Exibição">
   <p><em>Desenvolvimento para exibição no monitor</em></p>
 </div>
 
-
 ## Testes
-Descrição dos testes de funcionamento do sistema, bem como, análise dos resultados alcançados
+Nós realizamos cinco testes para a verificação efetiva do funcionamento do jogo, bem como para garantir que todos os requisitos estavam sendo previamente atendidos.
 
+**Caso de Teste 1: Jogo inicia, peça faz agrupamento e pontua.**
+Este caso de teste visou verificar o início do jogo utilizando as chaves da placa (SW0), bem como a efetiva funcionalidade do código feito para obter as informações do eixo X do acelerômetro presente na placa. Além disso, buscou também verificar a contagem de pontos e o agrupamento funcionando corretamente no VGA, onde, quando um agrupamento era realizado, ele desaparecia.
+
+**Caso de Teste 2: Jogo é pausado e em seguida retomado.**
+Este caso visou verificar a funcionalidade de pausa presente no jogo, usando as chaves da placa (SW01).
+
+**Caso de Teste 3: Acontece uma quebra do agrupamento e as peças descem.**
+Este caso visou verificar o correto funcionamento da quebra de linha. Quando ocorre um agrupamento de quatro quadrados de cores iguais, o agrupamento desaparecia, e as peças que estavam em cima desciam (caso houvesse peças acima).
+
+**Caso de Teste 4: Peças são empilhadas e atingem o topo.**
+Este caso verificou se, quando as peças atingiam o topo, o jogo era efetivamente finalizado e o jogador perdia, mantendo sua pontuação até o momento.
+
+**Caso de Teste 5: Jogo é encerrado com a chave.**
+Este caso verificou se, utilizando a chave SW0, o jogo era efetivamente finalizado.
+
+Dessa forma, esses cinco casos de teste tiveram o objetivo de cobrir os requisitos solicitados e verificar o cumprimento deles, bem como a lógica e o funcionamento do jogo. Assim, analisando os resultados alcançados, podemos concluir que o jogo (Codi Block) passou por esses cinco casos de teste sem pendências e cumpre todos os requisitos que foram solicitados.
+
+<div align="center">  
+  <img align="center" width=80% src="https://github.com/naylane/candi-block/blob/main/img/video.mp4" alt="Exibição">
+  <p><em>Jogando o jogo para testar as funcionalidades.</em></p>
+</div>
 
 ## Tecnologias e Ferramentas utilizadas
 - **Hardwares:**   

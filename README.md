@@ -3,7 +3,7 @@
   <img src="https://github.com/naylane/candi-block/blob/main/img/Candi-Block.png" alt="Candi Block" width="650"></a>
 </h1>
 
-<h4 align="center">Projeto da disciplina TEC 499 - Sistemas Digitais.</h4>
+<h4 align="center">Projeto da disciplina TEC 499 - Sistemas Digitais - TP04 | Grupo 02</h4>
 
 
 ## Sumário

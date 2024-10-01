@@ -112,11 +112,6 @@ Este caso verificou se, utilizando a chave SW0, o jogo era efetivamente finaliza
 
 Dessa forma, esses cinco casos de teste tiveram o objetivo de cobrir os requisitos solicitados e verificar o cumprimento deles, bem como a lógica e o funcionamento do jogo. Assim, analisando os resultados alcançados, podemos concluir que o jogo (Codi Block) passou por esses cinco casos de teste sem pendências e cumpre todos os requisitos que foram solicitados.
 
-<div align="center">  
-  <img align="center" width=80% src="https://github.com/naylane/candi-block/blob/main/img/video.mp4" alt="Exibição">
-  <p><em>Jogando o jogo para testar as funcionalidades.</em></p>
-</div>
-
 ## Tecnologias e Ferramentas utilizadas
 - **Hardwares:**   
   - Kit de Desenvolvimento DE1-SoC
